@@ -9,6 +9,6 @@ so all credits go to [HazemKhaled](https://github.com/HazemKhaled).
 * [Fokke Drawer Widget](http://gitt.io/component/nl.fokkezb.drawer)
 * [NappDrawer](http://gitt.io/component/dk.napp.drawer) or [DrawerLayout](https://github.com/manumaticx/Ti.DrawerLayout)
 
-## Usage
+## Usage
 
 `@todo`
