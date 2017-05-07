@@ -1,0 +1,7 @@
+'#drawer' : {
+    leftDrawerWidth: 200,
+    rightDrawerWidth: 200,
+    shouldStretchDrawer: false,
+    showShadow: true,
+    drawerLayout: true
+}

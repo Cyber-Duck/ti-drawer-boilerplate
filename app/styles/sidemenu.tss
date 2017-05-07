@@ -1,0 +1,10 @@
+'ListView' : {
+	separatorColor: 'gray'
+}
+'ListItem' : {
+	height: 60,
+	color: 'black',
+	font: {
+		fontSize: 20
+	}
+}

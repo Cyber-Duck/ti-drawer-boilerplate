@@ -1,0 +1,18 @@
+<Alloy>
+    <Window module="xp.ui">
+        <ListView onItemclick="onItemClick">
+            <ListSection>
+                <HeaderView platform="ios">
+                    <View height="70"/>
+                </HeaderView>
+                <ListItem title="Home Screen"/>
+                <ListItem title="Screen A as Home"/>
+                <ListItem title="Screen B as Home"/>
+                <ListItem title="Sub Screen A"/>
+            </ListSection>
+            <FooterView>
+                <View/>
+            </FooterView>
+        </ListView>
+    </Window>
+</Alloy>

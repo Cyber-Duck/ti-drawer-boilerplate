@@ -1,0 +1,9 @@
+<Alloy>
+    <Window module="xp.ui" title="Home Screen">
+        <View height="Ti.UI.SIZE" layout="vertical">
+            <Label>Home Screen</Label>
+            <Label id="stackSize" />
+            <Button onClick="openScreenA">Open Screen A</Button>
+        </View>
+    </Window>
+</Alloy>
