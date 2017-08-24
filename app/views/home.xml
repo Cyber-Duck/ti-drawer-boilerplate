@@ -1,5 +1,8 @@
 <Alloy>
-    <Window module="xp.ui" title="Home Screen">
+    <Window module="xp.ui" title="Home Screen" backgroundColor="#F4D9D0">
+        <LeftNavButton platform="ios">
+            <Require src="_menuButton" />
+        </LeftNavButton>
         <View height="Ti.UI.SIZE" layout="vertical">
             <Label>Home Screen</Label>
             <Label id="stackSize" />

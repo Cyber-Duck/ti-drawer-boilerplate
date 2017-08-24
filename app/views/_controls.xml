@@ -1,0 +1,6 @@
+<Alloy>
+    <View height="Ti.UI.SIZE" layout="vertical" bottom="0">
+        <Button onClick="Alloy.Globals.windowStack.home">Home</Button>
+        <Button onClick="Alloy.Globals.windowStack.back">Back</Button>
+    </View>
+</Alloy>

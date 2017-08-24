@@ -1,14 +1,10 @@
 <Alloy>
-    <Window module="xp.ui" title="Screen B">
+    <Window module="xp.ui" title="Screen B" backgroundColor="#B5DCE1">
         <View height="Ti.UI.SIZE" layout="vertical">
             <Label>Screen B</Label>
             <Label id="stackSize" />
             <Button onClick="openSubScreenA">Open Sub Screen A</Button>
         </View>
-
-        <View id="controls" height="Ti.UI.SIZE" layout="vertical" bottom="0">
-            <Button onClick="Alloy.Globals.windowStack.home">Home</Button>
-            <Button onClick="Alloy.Globals.windowStack.back">Back</Button>
-        </View>
+        <Require id="controls" src="_controls" />
     </Window>
 </Alloy>
