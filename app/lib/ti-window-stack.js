@@ -1,7 +1,7 @@
 /**
  * An Alloy widget to manage windows stack in same code for iOS and Android, with drawer support
  *
- * more https://github.com/HazemKhaled/TiWindowStack
+ * more https://github.com/Cyber-Duck/TiWindowStack
  */
 function WindowStack()
 {
@@ -69,8 +69,8 @@ function WindowStack()
      */
     this.setTargetInDrawer = function (targetInDrawer)
     {
-        if ([that.CENTER_WINDOW, that.RIGHT_WINDOW, that.LEFT_WINDOW].indexOf(targetInDrawer) !== -1){
-            this.targetInDrawer = targetInDrawer;
+        if ([that.CENTER_WINDOW, that.RIGHT_WINDOW, that.LEFT_WINDOW].indexOf(targetInDrawer) !== -1) {
+            that.targetInDrawer = targetInDrawer;
         }
     };
 
@@ -87,6 +87,16 @@ function WindowStack()
     {
         drawer = drawer || false;
         params = params || {};
+
+        // On open the window --> trigger useful event
+        _window.addEventListener('open', function(e) {
+            _window.fireEvent('ti-window-stack:sizechanged', e);
+        });
+        // On close the window --> update the windows array + trigger useful event
+        _window.addEventListener('close', function(e) {
+            windows = _.without(windows, _window);
+            _window.fireEvent('ti-window-stack:sizechanged', e);
+        });
 
         if (IOS) {
             // Create navigationWindow if we don't have, or if we have side menu
@@ -160,11 +170,6 @@ function WindowStack()
                 _window.open(params);
             }
         }
-
-        // On close the window update the windows array
-        _window.addEventListener('close', function() {
-            windows = _.without(windows, _window);
-        });
     };
 
     /**
@@ -172,9 +177,29 @@ function WindowStack()
      *
      * @return {Number}
      */
-    this.size = function()
+    this.getSize = function()
     {
         return windows.length;
+    };
+
+    /**
+     * Clarify if the current stack has more than one root level or not.
+     *
+     * @return {Boolean}
+     */
+    this.isRootLevel = function()
+    {
+        return windows.length === 0;
+    };
+
+    /**
+     * Clarify if the current stack has more than one root level or not.
+     *
+     * @return {Boolean}
+     */
+    this.isNotRootLevel = function()
+    {
+        return windows.length > 0;
     };
 
     /**
