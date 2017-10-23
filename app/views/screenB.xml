@@ -1,9 +1,11 @@
 <Alloy>
-    <Window module="xp.ui" title="Screen B" backgroundColor="#B5DCE1">
+    <Window module="xp.ui" title="Screen B" backgroundColor="#B5DCE1" forceWindowAndroid='true'>
         <View height="Ti.UI.SIZE" layout="vertical">
             <Label>Screen B</Label>
             <Label id="stackSize" />
-            <Button onClick="openSubScreenA">Open Sub Screen A</Button>
+            <Button onClick="openSubScreenB">Open Sub Screen</Button>
+            <Button platform="android" onClick="hideActionBar">Hide Action Bar</Button>
+            <Button platform="android" onClick="showActionBar">Show Action Bar</Button>
         </View>
         <Require id="controls" src="_controls" />
     </Window>

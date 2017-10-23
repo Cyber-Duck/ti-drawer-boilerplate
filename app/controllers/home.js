@@ -1,5 +1,5 @@
-function openScreenA() {
-    Alloy.Globals.windowStack.open(Alloy.createController('screenA').getView());
+function openScreenB() {
+    Alloy.Globals.windowStack.open(Alloy.createController('screenB').getView());
 }
 
 $.getView().addEventListener("ti-window-stack:sizechanged", function () {

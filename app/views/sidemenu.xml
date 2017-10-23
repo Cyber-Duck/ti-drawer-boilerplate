@@ -7,8 +7,7 @@
                 </HeaderView>
                 <ListItem title="Home Screen"/>
                 <ListItem title="Screen A as Home"/>
-                <ListItem title="Screen B as Home"/>
-                <ListItem title="Sub Screen A"/>
+                <ListItem title="Sub Screen B"/>
             </ListSection>
             <FooterView>
                 <View/>

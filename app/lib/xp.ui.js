@@ -13,6 +13,7 @@ exports.createWindow = function(args)
 };
 
 var toggleMenuButton = function (e) {
+    alert('toggleMenuButton');
     if (!Alloy.Globals.drawer || !Alloy.Globals.windowStack) {
         return;
     }
@@ -22,6 +23,8 @@ var toggleMenuButton = function (e) {
 };
 
 var toggleSwipe = function () {
+    alert('toggleSwipe');
+
     if (!Alloy.Globals.drawer || !Alloy.Globals.windowStack) {
         return;
     }
