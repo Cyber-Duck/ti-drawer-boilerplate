@@ -14,11 +14,8 @@ function showActionBar() {
 
 $.getView().addEventListener("open", function () {
     if (Alloy.Globals.windowStack.isNotRootLevel()) {
-
-console.log('Not root');
         $.controls.show();
     } else {
-console.log('At root');
         $.controls.hide();
     }
     $.stackSize.setText("Stack size: " + Alloy.Globals.windowStack.getSize());
