@@ -8,3 +8,11 @@
 		fontSize: 20
 	}
 }
+'Window' : {
+    backgroundGradient: {
+        type: 'linear',
+        startPoint: { x: '50%', y: '120%' },
+        endPoint: { x: '50%', y: '60%' },
+        colors: ["#008db7", "#005480"],
+   }
+}

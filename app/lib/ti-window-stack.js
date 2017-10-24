@@ -165,7 +165,11 @@ function WindowStack()
                 // Add this window to my stack reference
                 windows.push(_window);
                 // Open the window
-                _window.open(params);
+               console.log(params);
+//               console.log(windows);
+  //             console.log(_window);
+
+               _window.open(params);
             }
         }
     };

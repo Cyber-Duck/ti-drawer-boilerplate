@@ -1,5 +1,19 @@
-function openSubScreenA() {
-    Alloy.Globals.windowStack.open(Alloy.createController('screenA').getView());
+function openSubScreenB() {
+    Alloy.Globals.windowStack.open(Alloy.createController('screenB').getView());
+}
+
+// Hide the Android action bar
+function hideActionBar() {
+    $.screenB.activity.actionBar.hide();
+}
+
+// Show the Android action bar
+function showActionBar() {
+    $.screenB.activity.actionBar.show();
+}
+
+function showActionBarLogo() {
+    $.screenB.activity.actionBar.setLogo('logo.png');
 }
 
 $.getView().addEventListener("open", function () {

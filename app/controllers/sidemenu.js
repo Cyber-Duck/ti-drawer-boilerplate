@@ -7,10 +7,7 @@ function onItemClick(e) {
             Alloy.Globals.windowStack.open(Alloy.createController('screenA').getView(), Alloy.Globals.drawer);
             break;
         case 2:
-            Alloy.Globals.windowStack.open(Alloy.createController('screenB').getView(), Alloy.Globals.drawer);
-            break;
-        case 3:
-            Alloy.Globals.windowStack.open(Alloy.createController('screenA').getView());
+            Alloy.Globals.windowStack.open(Alloy.createController('screenB').getView());
             break;
     }
 
