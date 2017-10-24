@@ -8,7 +8,7 @@
             <Label id="stackSize" />
             <!-- <Button onClick="openScreenA">Open Screen A</Button> -->
             <Button onClick="openScreenB">Open Sub Screen</Button>
-
+            <Button onClick="showActionBarLogo">Show Action Bar Logo</Button>
         </View>
     </Window>
 </Alloy>

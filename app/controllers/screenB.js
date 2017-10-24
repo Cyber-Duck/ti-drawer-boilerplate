@@ -12,6 +12,10 @@ function showActionBar() {
     $.screenB.activity.actionBar.show();
 }
 
+function showActionBarLogo() {
+    $.screenB.activity.actionBar.setLogo('logo.png');
+}
+
 $.getView().addEventListener("open", function () {
     if (Alloy.Globals.windowStack.isNotRootLevel()) {
         $.controls.show();
