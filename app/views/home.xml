@@ -6,9 +6,8 @@
         <View height="Ti.UI.SIZE" layout="vertical">
             <Label>Home Screen</Label>
             <Label id="stackSize" />
-            <!-- <Button onClick="openScreenA">Open Screen A</Button> -->
             <Button onClick="openScreenB">Open Sub Screen</Button>
-            <Button onClick="showActionBarLogo">Show Action Bar Logo</Button>
+            <Button onClick="authenticate">Authenticate</Button>
         </View>
     </Window>
 </Alloy>

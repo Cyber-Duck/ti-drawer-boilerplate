@@ -55,6 +55,8 @@
         <module platform="android">com.tripvi.drawerlayout</module>
         <module platform="android">dk.napp.drawer</module>
         <module platform="iphone" version="1.2.4">dk.napp.drawer</module>
+        <module platform="android">ti.touchid</module>
+
     </modules>
     <deployment-targets>
         <target device="android">true</target>

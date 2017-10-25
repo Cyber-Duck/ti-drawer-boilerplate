@@ -7,6 +7,7 @@
             <Button platform="android" onClick="hideActionBar">Hide Action Bar</Button>
             <Button platform="android" onClick="showActionBar">Show Action Bar</Button>
             <Button platform="android" onClick="showActionBarLogo">Show Action Bar Logo</Button>
+            <Button platform="android" onClick="showHomeButton">Show Home Button</Button>
         </View>
         <Require id="controls" src="_controls" />
     </Window>

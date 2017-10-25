@@ -22,8 +22,8 @@
     <style name="Theme.Example" parent="@style/Theme.AppCompat">
         <item name="colorPrimary">#065480</item>
         <item name="colorAccent">#78BA4B</item>
-        <item name="icon">@drawable/logo</item>
-        <item name="title">"Test"</item>
+<!--         <item name="icon">@drawable/logo</item>
+        <item name="title">"Test"</item> -->
         <!-- Specify an Action Bar style to use -->
         <!-- <item name="android:actionBarStyle">@style/MyActionBar</item> -->
         <!-- This item is required for Android 2.3.x support -->
