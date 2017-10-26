@@ -108,6 +108,21 @@ if (mod === 'dk.napp.drawer') {
     $.addTopLevelView($.window);
 }
 
+// $.instance.addEventListener('change', function (e) {
+// 	console.log('change');
+// 	console.log(e);
+// });
+
+// $.instance.addEventListener('draweropen', function (e) {
+// 	console.log('draweropen');
+// 	console.log(e.source.rightView.children);
+// });
+
+// $.instance.addEventListener('draweropen', function (e) {
+// 	console.log('draweropen');
+// 	console.log(JSON.stringify(e.source.drawer));
+// });
+
 if (OS_ANDROID) {
     $.window.addEventListener('open', function (e) {
         var actionBar = (mod === 'dk.napp.drawer' ? this : e.source).getActivity().getActionBar();

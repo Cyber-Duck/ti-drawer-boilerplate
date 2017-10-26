@@ -9,6 +9,24 @@ exports.createWindow = function(args)
         window.addEventListener('ti-window-stack:sizechanged', toggleSwipe);
     }
 
+    // Show the home button and set onClick action
+    function showHomeButton() {
+        window._internalActivity.actionBar.setDisplayHomeAsUp(true);
+        window._internalActivity.actionBar.setOnHomeIconItemSelected(goBack);
+    }
+
+    // Close the current window
+    function goBack() {
+        Alloy.Globals.windowStack.back();
+    }
+
+    // Show / hide the controls once the view is open
+    window.addEventListener("open", function () {
+        if (Alloy.Globals.windowStack.isNotRootLevel() && OS_ANDROID) {
+            showHomeButton();
+        }
+    });
+
     return window;
 };
 

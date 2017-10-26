@@ -4,10 +4,9 @@
             <Label>Screen B</Label>
             <Label id="stackSize" />
             <Button onClick="openSubScreenB">Open Sub Screen</Button>
-            <Button platform="android" onClick="hideActionBar">Hide Action Bar</Button>
-            <Button platform="android" onClick="showActionBar">Show Action Bar</Button>
+            <Button id='toggleActionBarBtn' onClick="hideActionBar" platform="android">Hide Action Bar</Button>
+            <Button id='toggleHomeBtn' platform="android" onClick="hideHomeButton">Hide Home Button</Button>
             <Button platform="android" onClick="showActionBarLogo">Show Action Bar Logo</Button>
-            <Button platform="android" onClick="showHomeButton">Show Home Button</Button>
         </View>
         <Require id="controls" src="_controls" />
     </Window>
