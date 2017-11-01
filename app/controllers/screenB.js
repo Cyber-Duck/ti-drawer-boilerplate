@@ -18,7 +18,10 @@ function showActionBar() {
     $.toggleActionBarBtn.setTitle('Hide action bar');
 }
 
-
+function changeTestFunc(e) {
+    console.log(e);
+    console.log($.changeTest.getValue());
+}
 
 // Show the logo on the action bar
 function showActionBarLogo() {
@@ -50,3 +53,27 @@ $.getView().addEventListener("open", function () {
     }
     $.stackSize.setText("Stack size: " + Alloy.Globals.windowStack.getSize());
 });
+
+//Fill the sagepay webform
+function fillForm(e) {
+    console.log('fill form');
+    //e.source.setMask(e);
+    // console.log($.cardNumber.getValue()
+    //     // .replace(/\D/g, '')
+    //     // .replace(/\s/g, '')
+    // );
+    // var values = {
+    //     'cardholder-name': $.cardName.getValue(),
+    //     'card-number': $.cardNumber.getValue()
+    //         .replace(/\D/g, '')
+    //         .replace(/\s/g, ''),
+    //     'expiry-date': $.expiry.getValue()
+    //         .replace(/\D/g, '')
+    //         .replace(/\s/g, ''),
+    //     'security-code': $.cvv.getValue()
+    //         .replace(/\D/g, '')
+    //         .replace(/\s/g, '')
+    // };
+
+    //  $.webView.evalJS('fillForm(' + JSON.stringify(values) + ')');
+}
