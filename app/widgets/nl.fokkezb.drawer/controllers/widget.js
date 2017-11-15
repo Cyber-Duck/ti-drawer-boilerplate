@@ -3,15 +3,12 @@ var args = arguments[0] || {};
 var mod;
 
 if (OS_ANDROID && args.drawerLayout) {
-    // if Titanium SDK is 6.2 use the drawer included in the Titanium API, not use external module
-    if ( parseFloat(Ti.version) < 6.2 ) { // use module
-        mod = 'com.tripvi.drawerlayout';
-        $.module = require(mod);
-    }
+    mod = 'com.tripvi.drawerlayout';
 } else {
     mod = 'dk.napp.drawer';
-    $.module = require(mod);
 }
+
+$.module = require(mod);
 
 // convert children to args based on role
 if (args.children) {
@@ -103,17 +100,28 @@ if (mod === 'dk.napp.drawer') {
 
 } else {
     // create actual drawer
-    if ( parseFloat(Ti.version) < 6.2 ) { // use module
-        $.instance = $.module.createDrawer(_.omit(args, 'window'));
-    } else { // use Titanium API
-        $.instance = Ti.UI.Android.createDrawerLayout(_.omit(args, 'window'));
-    }
+    $.instance = $.module.createDrawer(_.omit(args, 'window'));
 
-    $.window = Ti.UI.createWindow(_.extend(_.pick(args, ["orientationModes", "exitOnClose", "backgroundColor", "theme"]), args.window || {}));
+    $.window = Ti.UI.createWindow(_.extend(_.pick(args, ["orientationModes", "exitOnClose", "backgroundColor"]), args.window || {}));
     $.window.add($.instance);
 
     $.addTopLevelView($.window);
 }
+
+// $.instance.addEventListener('change', function (e) {
+// 	console.log('change');
+// 	console.log(e);
+// });
+
+// $.instance.addEventListener('draweropen', function (e) {
+// 	console.log('draweropen');
+// 	console.log(e.source.rightView.children);
+// });
+
+// $.instance.addEventListener('draweropen', function (e) {
+// 	console.log('draweropen');
+// 	console.log(JSON.stringify(e.source.drawer));
+// });
 
 if (OS_ANDROID) {
     $.window.addEventListener('open', function (e) {
@@ -157,40 +165,22 @@ if (mod === 'dk.napp.drawer') {
         'arrowAnimation'
     ];
 } else {
-
-    if ( parseFloat(Ti.version) < 6.2 ) { // use module
-        props = [
-            'leftView',
-            'rightView',
-            'centerView',
-            'isLeftDrawerOpen',
-            'isLeftDrawerVisible',
-            'isRightDrawerOpen',
-            'isRightDrawerVisible',
-            'leftDrawerWidth',
-            'rightDrawerWidth',
-            'drawerIndicatorEnabled',
-            'drawerIndicatorImage',
-            'drawerLockMode',
-            'drawerArrowIcon',
-            'drawerArrowIconColor'
-        ];
-    } else { // use native drawer provided on Titanium SDK 6.2
-        props = [
-            'leftView',
-            'rightView',
-            'centerView',
-            'isLeftOpen',
-            'isLeftVisible',
-            'isRightOpen',
-            'isRightVisible',
-            'leftWidth',
-            'rightWidth',
-            'drawerIndicatorEnabled',
-            'drawerLockMode',
-            'toolbarEnabled'
-        ];
-    }
+    props = [
+        'leftView',
+        'rightView',
+        'centerView',
+        'isLeftDrawerOpen',
+        'isLeftDrawerVisible',
+        'isRightDrawerOpen',
+        'isRightDrawerVisible',
+        'leftDrawerWidth',
+        'rightDrawerWidth',
+        'drawerIndicatorEnabled',
+        'drawerIndicatorImage',
+        'drawerLockMode',
+        'drawerArrowIcon',
+        'drawerArrowIconColor'
+    ];
 }
 
 // expose properties, setters and getters
@@ -291,48 +281,6 @@ if (mod === 'dk.napp.drawer') {
         return $.instance.getIsRightDrawerOpen();
     };
 
-    // the Titanium drawer API names differs from the external module API names
-    // so we need to overwrite and create new functions to map to the right methods
-    if ( parseFloat(Ti.version) >= 6.2 ) {
-        // overwrite functions to map to the correct names
-        $.isAnyWindowOpen = function () {
-            return $.instance.isLeftOpen || $.instance.isRightOpen;
-        };
-
-        $.isLeftWindowOpen = function () {
-            return $.instance.isLeftOpen;
-        };
-
-        $.isRightWindowOpen = function () {
-            return $.instance.isRightOpen;
-        };
-
-        // create new functions to map to the correct function names
-        $.toggleLeftWindow = function () {
-            return $.instance.toggleLeft();
-        };
-
-        $.openLeftWindow = function () {
-            return $.instance.openLeft();
-        };
-
-        $.closeLeftWindow = function () {
-            return $.instance.closeLeft();
-        };
-
-        $.toggleRightWindow = function () {
-            return $.instance.toggleRight();
-        };
-
-        $.openRightWindow = function () {
-            return $.instance.openRight();
-        };
-
-        $.closeRightWindow = function () {
-            return $.instance.closeRight();
-        };
-    }
-
     $.leftWindow = $.leftView;
     $.setLeftWindow = $.setLeftView;
     $.getLeftWindow = $.getLeftView;
@@ -360,21 +308,15 @@ if (mod === 'dk.napp.drawer') {
 
 // events
 $.on = function (event, callback, context) {
-    if (mod !== 'dk.napp.drawer' && (event === 'open' || event === 'close' || event === 'focus' || event === 'androidback')) {
-        return $.window.addEventListener(event, callback);
-    }
-    return $.instance.addEventListener(translateEvent(event), callback);
+    return $.instance.addEventListener(event, callback);
 };
 
 $.off = function (event, callback, context) {
-    if (mod !== 'dk.napp.drawer' && (event === 'open' || event === 'close' || event === 'focus' || event === 'androidback')) {
-        return $.window.addEventListener(event, callback);
-    }
-    return $.instance.removeEventListener(translateEvent(event), callback);
+    return $.instance.removeEventListener(event, callback);
 };
 
 $.trigger = function (event, args) {
-    return $.instance.fireEvent(translateEvent(event), args);
+    return $.instance.fireEvent(event, args);
 };
 
 $.addEventListener = $.on;
@@ -396,27 +338,15 @@ if (mod === 'dk.napp.drawer') {
         'close'
     ];
 } else {
-    if ( parseFloat(Ti.version) < 6.2 ) { // use module
-        methods = [
-            'replaceCenterView',
-            'toggleLeftWindow',
-            'openLeftWindow',
-            'closeLeftWindow',
-            'toggleRightWindow',
-            'openRightWindow',
-            'closeRightWindow'
-        ];
-    } else { // use native drawer provided on Titanium SDK 6.2
-        methods = [
-            'replaceCenterView',
-            'toggleLeft',
-            'openLeft',
-            'closeLeft',
-            'toggleRight',
-            'openRight',
-            'closeRight'
-        ];
-    }
+    methods = [
+        'replaceCenterView',
+        'toggleLeftWindow',
+        'openLeftWindow',
+        'closeLeftWindow',
+        'toggleRightWindow',
+        'openRightWindow',
+        'closeRightWindow'
+    ];
 }
 
 // exporse other methods
@@ -430,29 +360,3 @@ _.each(methods, function (fn) {
         };
     }
 });
-
-function translateEvent(event) {
-
-    if (mod === 'dk.napp.drawer') {
-
-        if (event === 'draweropen') {
-            event = 'windowDidOpen';
-        }
-
-        if (event === 'drawerclose') {
-            event = 'windowDidClose';
-        }
-
-    } else {
-
-        if (event === 'windowDidOpen') {
-            event = 'draweropen';
-        }
-
-        if (event === 'windowDidClose') {
-            event = 'drawerclose';
-        }
-    }
-
-    return event;
-}

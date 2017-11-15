@@ -1,66 +1,107 @@
-<?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
-    <id>com.cyberduck.tidrawerboilerplate</id>
-    <name>Drawer Boilerplate</name>
-    <version>1.0</version>
-    <publisher>not specified</publisher>
-    <url>not specified</url>
-    <description/>
-    <copyright>not specified</copyright>
-    <icon>appicon.png</icon>
-    <fullscreen>false</fullscreen>
-    <navbar-hidden>false</navbar-hidden>
-    <analytics>false</analytics>
-    <guid>6a491c4d-674c-4906-9888-0c711d4b1bad</guid>
-    <property name="ti.ui.defaultunit" type="string">dp</property>
-    <ios>
-        <plist>
-            <dict>
-                <key>UISupportedInterfaceOrientations~iphone</key>
-                <array>
-                    <string>UIInterfaceOrientationPortrait</string>
-                </array>
-                <key>UISupportedInterfaceOrientations~ipad</key>
-                <array>
-                    <string>UIInterfaceOrientationPortrait</string>
-                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
-                    <string>UIInterfaceOrientationLandscapeLeft</string>
-                    <string>UIInterfaceOrientationLandscapeRight</string>
-                </array>
-                <key>UIRequiresPersistentWiFi</key>
-                <false/>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-                <key>UIStatusBarHidden</key>
-                <false/>
-                <key>UIStatusBarStyle</key>
-                <string>UIStatusBarStyleDefault</string>
-            </dict>
-        </plist>
-    </ios>
-    <android xmlns:android="http://schemas.android.com/apk/res/android">
-    </android>
-    <mobileweb>
-        <precache>
-        </precache>
-        <splash>
-            <enabled>true</enabled>
-            <inline-css-images>true</inline-css-images>
-        </splash>
-        <theme>default</theme>
-    </mobileweb>
-    <modules>
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app
+  xmlns:ti="http://ti.appcelerator.org">
+  <id>com.cyberduck.drawer-boilerplate</id>
+  <name>Drawer Boilerplate</name>
+  <version>1.0</version>
+  <publisher>not specified</publisher>
+  <url>not specified</url>
+  <description>not specified</description>
+  <copyright>not specified</copyright>
+  <icon>appicon.png</icon>
+  <fullscreen>false</fullscreen>
+  <navbar-hidden>false</navbar-hidden>
+  <analytics>false</analytics>
+  <guid>1317d019-c81c-45c9-9eee-58086825b726</guid>
+  <property name="ti.ui.defaultunit" type="string">dp</property>
+  <ios>
+    <plist>
+      <dict>
+        <key>UISupportedInterfaceOrientations~iphone</key>
+        <array>
+          <string>UIInterfaceOrientationPortrait</string>
+        </array>
+        <key>UISupportedInterfaceOrientations~ipad</key>
+        <array>
+          <string>UIInterfaceOrientationPortrait</string>
+          <string>UIInterfaceOrientationPortraitUpsideDown</string>
+          <string>UIInterfaceOrientationLandscapeLeft</string>
+          <string>UIInterfaceOrientationLandscapeRight</string>
+        </array>
+        <key>UIRequiresPersistentWiFi</key>
+        <false/>
+        <key>UIPrerenderedIcon</key>
+        <false/>
+        <key>UIStatusBarHidden</key>
+        <false/>
+        <key>UIStatusBarStyle</key>
+        <string>UIStatusBarStyleDefault</string>
+      </dict>
+    </plist>
+  </ios>
+  <android xmlns:android="http://schemas.android.com/apk/res/android">
+    <manifest android:versionCode="1" android:versionName="1.0">
+        <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25"/>
+        <compatible-screens>
+            <!-- all small size screens - except ldpi -->
+            <screen android:screenDensity="mdpi" android:screenSize="small"/>
+            <screen android:screenDensity="hdpi" android:screenSize="small"/>
+            <screen android:screenDensity="xhdpi" android:screenSize="small"/>
+            <!-- all normal size screens - except ldpi -->
+            <screen android:screenDensity="mdpi" android:screenSize="normal"/>
+            <screen android:screenDensity="hdpi" android:screenSize="normal"/>
+            <screen android:screenDensity="xhdpi" android:screenSize="normal"/>
+            <!-- all large size screens - except ldpi -->
+            <screen android:screenDensity="mdpi" android:screenSize="large"/>
+            <screen android:screenDensity="hdpi" android:screenSize="large"/>
+            <screen android:screenDensity="xhdpi" android:screenSize="large"/>
+            <!-- all xlarge size screens - except ldpi -->
+            <screen android:screenDensity="mdpi" android:screenSize="xlarge"/>
+            <screen android:screenDensity="hdpi" android:screenSize="xlarge"/>
+            <screen android:screenDensity="xhdpi" android:screenSize="xlarge"/>
+        </compatible-screens>
+        <application android:screenOrientation="portrait" android:theme="@style/boilerplate"/>
+        <!-- Camera Permissions -->
+        <uses-feature android:name="android.hardware.camera"/>
+        <uses-feature android:name="android.hardware.camera.any"/>
+        <uses-feature android:name="android.hardware.camera.front"/>
+        <uses-feature android:name="android.hardware.camera.flash"/>
+        <uses-feature android:name="android.hardware.camera.autofocus"/>
+        <uses-permission android:name="android.permission.CAMERA"/>
+        <!-- Wifi Permissions -->
+        <uses-feature android:name="android.hardware.wifi"/>
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+        <!-- Storage Permissions -->
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+        <!-- Only devices with phone capabilities -->
+        <uses-feature android:name="android.hardware.telephony"/>
+    </manifest>
+  </android>
+  <mobileweb>
+    <precache/>
+    <splash>
+      <enabled>true</enabled>
+      <inline-css-images>true</inline-css-images>
+    </splash>
+    <theme>default</theme>
+  </mobileweb>
+  <modules>
     <module platform="android" version="2.0.0">com.tripvi.drawerlayout</module>
-    <module platform="android" version="2.0.1">dk.napp.drawer</module>
-    <module platform="iphone" version="1.2.3">dk.napp.drawer</module>
+    <module platform="iphone" version="1.2.4">dk.napp.drawer</module>
   </modules>
-    <deployment-targets>
-        <target device="android">true</target>
-        <target device="ipad">false</target>
-        <target device="iphone">true</target>
-        <target device="mobileweb">false</target>
-        <target device="windows">false</target>
-    </deployment-targets>
-    <sdk-version>6.2.1.GA</sdk-version>
-<plugins><plugin version="1.0">ti.alloy</plugin>
-</plugins>
+  <deployment-targets>
+    <target device="android">true</target>
+    <target device="ipad">false</target>
+    <target device="iphone">true</target>
+    <target device="mobileweb">false</target>
+    <target device="windows">false</target>
+  </deployment-targets>
+  <sdk-version>6.3.0.GA</sdk-version>
+  <plugins>
+    <plugin version="1.0">ti.alloy</plugin>
+  </plugins>
+  <property name="appc-app-id" type="string">5a0ac2426e9f6a09a3595497</property>
 </ti:app>

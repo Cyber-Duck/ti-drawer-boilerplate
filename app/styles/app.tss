@@ -1,9 +1,9 @@
 'Label[platform=android,windows]' : {
-	color: '#000',
+	color: '#000'
 }
 'Window' : {
-	backgroundColor: '#fff',
+	backgroundColor: '#fff'
 }
-"TextField[platform=android]": {
-	height: Ti.UI.SIZE,
+'TextField[platform=android]' : {
+	height: Ti.UI.SIZE
 }
