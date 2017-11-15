@@ -1,7 +1,11 @@
-'#drawer' : {
-    leftDrawerWidth: 200,
-    rightDrawerWidth: 200,
-    shouldStretchDrawer: false,
+"#drawer": {
+    drawerLayout: true,
+    animationMode: "ANIMATION_SLIDE",
+    leftDrawerWidth: 250,
+    rightDrawerWidth: 250,
     showShadow: true,
-    drawerLayout: true
+    openDrawerGestureMode: "OPEN_MODE_ALL",
+    closeDrawerGestureMode: "CLOSE_MODE_ALL",
+    centerHiddenInteractionMode: "OPEN_CENTER_MODE_NAVBAR",
+    shouldStretchDrawer: false,
 }

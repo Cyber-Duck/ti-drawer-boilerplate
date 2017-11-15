@@ -1,10 +1,20 @@
-'ListView' : {
-	separatorColor: 'gray'
+"Window": {
+    width: Ti.UI.FILL,
+    height: Ti.UI.FILL,
 }
-'ListItem' : {
+"ListView": {
+	separatorColor: 'gray',
+    height: Ti.UI.SIZE,
+    layout: "vertical",
+    canScroll: false,
+}
+"ListSection": {
+    height: Ti.UI.SIZE,
+}
+"ListItem": {
 	height: 60,
 	color: 'black',
 	font: {
-		fontSize: 20
-	}
+		fontSize: 20,
+	},
 }
