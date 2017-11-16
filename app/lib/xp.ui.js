@@ -64,13 +64,13 @@ if (OS_ANDROID) {
 }
 
 exports.createNavigationWindow = function (args) {
-    var navWin = OS_IOS ? Ti.UI.iOS.createNavigationWindow(args) : new NavigationWindow(args);
+    var navigationWindow = OS_IOS ? Ti.UI.iOS.createNavigationWindow(args) : new NavigationWindow(args);
 
     if (args && args.id) {
-        Alloy.Globals[args.id] = navWin;
+        Alloy.Globals[args.id] = navigationWindow;
     }
 
-    return navWin;
+    return navigationWindow;
 };
 
 exports.createWindow = function(args)
@@ -79,28 +79,26 @@ exports.createWindow = function(args)
 
     var window = Ti.UI[(OS_IOS || forceWindowAndroid) ? 'createWindow' : 'createView'](args);
 
-    if (OS_IOS && Alloy.Globals.windowStack) {
-        window.addEventListener('ti-window-stack:sizechanged', toggleMenuButton);
+    if (Alloy.Globals.windowStack) {
+        if (OS_IOS) {
+            window.addEventListener('ti-window-stack:sizechanged', toggleMenuButton);
+        }
         window.addEventListener('ti-window-stack:sizechanged', toggleSwipe);
     }
 
-    // Show the home button and set onClick action
-    function showHomeButton() {
-        window._internalActivity.actionBar.setDisplayHomeAsUp(true);
-        window._internalActivity.actionBar.setOnHomeIconItemSelected(goBack);
-    }
-
-    // Close the current window
-    function goBack() {
-        Alloy.Globals.windowStack.back();
-    }
-
     // Show / hide the controls once the view is open
-    window.addEventListener("open", function () {
-        if (Alloy.Globals.windowStack.isNotRootLevel() && OS_ANDROID) {
-            showHomeButton();
-        }
-    });
+    if (OS_ANDROID) {
+        window.addEventListener("open", function () {
+            if (Alloy.Globals.windowStack && Alloy.Globals.windowStack.isNotRootLevel()) {
+                // Show the home button and set onClick action
+                window._internalActivity.actionBar.setDisplayHomeAsUp(true);
+                window._internalActivity.actionBar.setOnHomeIconItemSelected(function() {
+                    // Close the current window
+                    Alloy.Globals.windowStack.back();
+                });
+            }
+        });
+    }
 
     return window;
 };

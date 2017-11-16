@@ -1,5 +1,5 @@
 <Alloy>
-    <Window module="xp.ui" title="Root B" backgroundColor="#F9C84D" forceWindowAndroid="false">
+    <Window module="xp.ui" title="Root B" backgroundColor="#F9C84D">
         <View height="Ti.UI.SIZE" layout="vertical">
             <Label>Root Screen B</Label>
             <Label id="stackSize" />

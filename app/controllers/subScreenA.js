@@ -1,8 +1,8 @@
-var openSubScreenA = _.debounce(function() {
+function openSubScreenA() {
     Alloy.Globals.windowStack.open(
         Alloy.createController('subScreenA').getView()
     );
-}, 50, false);
+}
 
 // Hide the Android action bar
 function hideActionBar() {
