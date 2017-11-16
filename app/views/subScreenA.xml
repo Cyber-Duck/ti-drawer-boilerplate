@@ -1,10 +1,11 @@
 <Alloy>
-    <Window module="xp.ui" title="Sub A" backgroundColor="#DA81EF">
+    <Window title="Sub A" backgroundColor="#DA81EF">
+        <ActionBar platform="android" displayHomeAsUp="Alloy.Globals.windowStack.isNotRootLevel()" onHomeIconItemSelected="Alloy.Globals.windowStack.back" />
         <View height="Ti.UI.SIZE" layout="vertical">
             <Label>Sub Screen A</Label>
             <Label id="stackSize" />
             <Button onClick="openSubScreenA">Open Sub Screen A (again)</Button>
-            <Button id="toggleActionBarBtn" onClick="hideActionBar" platform="android">Hide Action Bar</Button>
+            <Button id="toggleActionBarBtn" platform="android" onClick="hideActionBar">Hide Action Bar</Button>
             <Button id="toggleHomeBtn" platform="android" onClick="hideHomeButton">Hide Home Button</Button>
         </View>
         <Require id="controls" src="_controls" />

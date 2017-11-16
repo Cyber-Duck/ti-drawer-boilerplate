@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app
   xmlns:ti="http://ti.appcelerator.org">
-  <id>com.cyberduck.drawer-boilerplate</id>
+  <id>uk.co.cyberduck.boilerplate.drawer</id>
   <name>Drawer Boilerplate</name>
   <version>1.0</version>
   <publisher>not specified</publisher>
@@ -14,6 +14,7 @@
   <analytics>false</analytics>
   <guid>1317d019-c81c-45c9-9eee-58086825b726</guid>
   <property name="ti.ui.defaultunit" type="string">dp</property>
+  <property name="run-on-main-thread" type="bool">true</property>
   <ios>
     <plist>
       <dict>

@@ -1,9 +1,15 @@
 "Window": {
     backgroundColor: "#3C3C3B",
 }
-"ListView" : {
-	separatorColor: "#c0c0c0",
+"ListView": {
+    height: Ti.UI.SIZE,
+    showVerticalScrollIndicator: false,
     backgroundColor: "transparent",
+    canScroll: false,
+}
+"ListView[platform=ios]": {
+    separatorColor: "#c0c0c0",
+    willScrollOnStatusTap: false,
 }
 "ListItem" : {
 	height: 60,
