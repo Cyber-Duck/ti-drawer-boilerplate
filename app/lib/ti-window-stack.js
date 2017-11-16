@@ -166,9 +166,6 @@ function WindowStack()
                 windows.push(_window);
                 // Open the window
                console.log(params);
-//               console.log(windows);
-  //             console.log(_window);
-
                _window.open(params);
             }
         }

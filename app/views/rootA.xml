@@ -1,12 +1,12 @@
 <Alloy>
-    <Window id='home' module="xp.ui" title="Home Screen" backgroundColor="#F4D9D0">
+    <Window id="rootA" module="xp.ui" title="Root A" backgroundColor="#ECECEC">
         <LeftNavButton platform="ios">
             <Require src="_menuButton" />
         </LeftNavButton>
         <View height="Ti.UI.SIZE" layout="vertical">
-            <Label>Home Screen</Label>
+            <Label>Root Screen A</Label>
             <Label id="stackSize" />
-            <Button onClick="openScreenB">Open Sub Screen</Button>
+            <Button onClick="openSubScreenA">Open Sub Screen A</Button>
         </View>
     </Window>
 </Alloy>

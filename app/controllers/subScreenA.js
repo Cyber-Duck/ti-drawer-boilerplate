@@ -1,10 +1,12 @@
-function openSubScreenB() {
-    Alloy.Globals.windowStack.open(Alloy.createController('screenB').getView());
-}
+var openSubScreenA = _.debounce(function() {
+    Alloy.Globals.windowStack.open(
+        Alloy.createController('subScreenA').getView()
+    );
+}, 50, false);
 
 // Hide the Android action bar
 function hideActionBar() {
-    $.screenB.activity.actionBar.hide();
+    $.subScreenA.activity.actionBar.hide();
     $.toggleActionBarBtn.removeEventListener("click", hideActionBar);
     $.toggleActionBarBtn.addEventListener("click", showActionBar);
     $.toggleActionBarBtn.setTitle('Show action bar');
@@ -12,7 +14,7 @@ function hideActionBar() {
 
 // Show the Android action bar
 function showActionBar() {
-    $.screenB.activity.actionBar.show();
+    $.subScreenA.activity.actionBar.show();
     $.toggleActionBarBtn.removeEventListener("click", showActionBar);
     $.toggleActionBarBtn.addEventListener("click", hideActionBar);
     $.toggleActionBarBtn.setTitle('Hide action bar');
@@ -20,7 +22,7 @@ function showActionBar() {
 
 // Show the home button and set onClick action
 function showHomeButton() {
-    $.screenB.activity.actionBar.setDisplayHomeAsUp(true);
+    $.subScreenA.activity.actionBar.setDisplayHomeAsUp(true);
     $.toggleHomeBtn.removeEventListener("click", showHomeButton);
     $.toggleHomeBtn.addEventListener("click", hideHomeButton);
     $.toggleHomeBtn.setTitle('Show home button');
@@ -28,7 +30,7 @@ function showHomeButton() {
 
 // Show the home button and set onClick action
 function hideHomeButton() {
-    $.screenB.activity.actionBar.setDisplayHomeAsUp(false);
+    $.subScreenA.activity.actionBar.setDisplayHomeAsUp(false);
     $.toggleHomeBtn.removeEventListener("click", hideHomeButton);
     $.toggleHomeBtn.addEventListener("click", showHomeButton);
     $.toggleHomeBtn.setTitle('Show home button');

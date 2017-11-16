@@ -1,9 +1,9 @@
 <Alloy>
-    <Window module="xp.ui" title="Screen B" backgroundColor="#B5DCE1" forceWindowAndroid="true">
+    <Window module="xp.ui" title="Sub A" backgroundColor="#DA81EF" forceWindowAndroid="true">
         <View height="Ti.UI.SIZE" layout="vertical">
-            <Label>Screen B</Label>
+            <Label>Sub Screen A</Label>
             <Label id="stackSize" />
-            <Button onClick="openSubScreenB">Open Sub Screen</Button>
+            <Button onClick="openSubScreenA">Open Sub Screen A (again)</Button>
             <Button id="toggleActionBarBtn" onClick="hideActionBar" platform="android">Hide Action Bar</Button>
             <Button id="toggleHomeBtn" platform="android" onClick="hideHomeButton">Hide Home Button</Button>
         </View>

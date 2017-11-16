@@ -1,0 +1,11 @@
+<Alloy>
+    <Window module="xp.ui" title="Root B" backgroundColor="#F9C84D" forceWindowAndroid="false">
+        <View height="Ti.UI.SIZE" layout="vertical">
+            <Label>Root Screen B</Label>
+            <Label id="stackSize" />
+            <Button onClick="openSubScreenA">Open Sub Screen A</Button>
+        </View>
+        <Require id="controls" src="_controls" />
+    </Window>
+</Alloy>
+

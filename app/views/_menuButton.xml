@@ -1,5 +1,5 @@
 <Alloy>
     <View width="Ti.UI.SIZE">
-        <Button title="Menu" onClick="toggleMenu" width="Ti.UI.SIZE" />
+        <Button title="Menu" onClick="toggleMenu" width="Ti.UI.SIZE" color="white" font="{fontSize:18}" />
     </View>
 </Alloy>

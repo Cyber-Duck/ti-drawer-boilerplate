@@ -39,45 +39,10 @@
       </dict>
     </plist>
   </ios>
-  <android xmlns:android="http://schemas.android.com/apk/res/android">
+   <android xmlns:android="http://schemas.android.com/apk/res/android">
     <manifest android:versionCode="1" android:versionName="1.0">
-        <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25"/>
-        <compatible-screens>
-            <!-- all small size screens - except ldpi -->
-            <screen android:screenDensity="mdpi" android:screenSize="small"/>
-            <screen android:screenDensity="hdpi" android:screenSize="small"/>
-            <screen android:screenDensity="xhdpi" android:screenSize="small"/>
-            <!-- all normal size screens - except ldpi -->
-            <screen android:screenDensity="mdpi" android:screenSize="normal"/>
-            <screen android:screenDensity="hdpi" android:screenSize="normal"/>
-            <screen android:screenDensity="xhdpi" android:screenSize="normal"/>
-            <!-- all large size screens - except ldpi -->
-            <screen android:screenDensity="mdpi" android:screenSize="large"/>
-            <screen android:screenDensity="hdpi" android:screenSize="large"/>
-            <screen android:screenDensity="xhdpi" android:screenSize="large"/>
-            <!-- all xlarge size screens - except ldpi -->
-            <screen android:screenDensity="mdpi" android:screenSize="xlarge"/>
-            <screen android:screenDensity="hdpi" android:screenSize="xlarge"/>
-            <screen android:screenDensity="xhdpi" android:screenSize="xlarge"/>
-        </compatible-screens>
-        <application android:screenOrientation="portrait" android:theme="@style/boilerplate"/>
-        <!-- Camera Permissions -->
-        <uses-feature android:name="android.hardware.camera"/>
-        <uses-feature android:name="android.hardware.camera.any"/>
-        <uses-feature android:name="android.hardware.camera.front"/>
-        <uses-feature android:name="android.hardware.camera.flash"/>
-        <uses-feature android:name="android.hardware.camera.autofocus"/>
-        <uses-permission android:name="android.permission.CAMERA"/>
-        <!-- Wifi Permissions -->
-        <uses-feature android:name="android.hardware.wifi"/>
-        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-        <!-- Storage Permissions -->
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-        <!-- Only devices with phone capabilities -->
-        <uses-feature android:name="android.hardware.telephony"/>
+      <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25"/>
+      <application android:theme="@style/boilerplate"/>
     </manifest>
   </android>
   <mobileweb>

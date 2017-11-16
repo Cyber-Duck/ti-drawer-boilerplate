@@ -1,5 +1,5 @@
-function openSubScreenB() {
-    Alloy.Globals.windowStack.open(Alloy.createController('screenB').getView());
+function openSubScreenA() {
+    Alloy.Globals.windowStack.open(Alloy.createController('subScreenA').getView());
 }
 
 $.getView().addEventListener("open", function () {

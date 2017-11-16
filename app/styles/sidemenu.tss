@@ -1,18 +1,21 @@
-'ListView' : {
-	separatorColor: 'gray'
+"Window": {
+    backgroundColor: "#3C3C3B",
 }
-'ListItem' : {
+"ListView" : {
+	separatorColor: "#c0c0c0",
+    backgroundColor: "transparent",
+}
+"ListItem" : {
 	height: 60,
-	color: 'black',
-	font: {
-		fontSize: 20
-	}
+    backgroundColor: "transparent",
 }
-'Window' : {
-    backgroundGradient: {
-        type: 'linear',
-        startPoint: { x: '50%', y: '120%' },
-        endPoint: { x: '50%', y: '60%' },
-        colors: ["#008db7", "#005480"],
-   }
+"Label": {
+    height: 60,
+    width: Ti.UI.FILL,
+    left: 20,
+    color: "white",
+    font: {
+        fontSize: 20,
+    },
+    selectedColor: "#3C3C3B",
 }

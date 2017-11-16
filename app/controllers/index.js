@@ -1,4 +1,4 @@
- Alloy.Globals.windowStack.open(Alloy.createController('home').getView(), $.drawer);
+ Alloy.Globals.windowStack.open(Alloy.createController('rootA').getView(), $.drawer);
 
 // Drawer come from right or left
 var direction = Ti.Locale.currentLanguage === 'ar' ? 'Right' : 'Left';
