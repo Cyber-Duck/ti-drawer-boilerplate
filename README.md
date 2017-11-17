@@ -27,6 +27,10 @@ iOS Demo           |  Android Demo
 
 ## Usage and explanations
 
+Once cloned, you can run `appc new --import --no-service` to initialise your `tiapp.xml` file with a valid app GUID.
+
+From there, you should be ready to build and test the boilerplate.
+
 ### nl.fokkezb.drawer
 
 Forked form [TiWindowStack](https://github.com/fokkezb/nl.fokkezb.drawer) version 1.1.3.
