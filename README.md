@@ -134,6 +134,23 @@ On chidlren windows, the home button (in the ActionBar) should be available, ren
 
 This is automatically handled by `xp.ui` too.
 
+### Play by the rules
+
+`module="xp.ui"` needs to be specified on every `<Window>` element which is going to require automatic built-in functionalities like described here.
+
+It can also be used on a `<NavigationWindow>` element if you need to add a modal window for example. It will be cross-compatible with Android.
+
+Use the following functions to navigate through the stack if windows:
+
+* `Alloy.Globals.windowStack.open()`
+* `Alloy.Globals.windowStack.back()`
+* `Alloy.Globals.windowStack.home()`
+
+and optionally
+
+* `Alloy.Globals.windowStack.close()`
+* `Alloy.Globals.windowStack.close()`
+
 ## License
 
 ```
