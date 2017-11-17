@@ -37,7 +37,7 @@ function hideHomeButton() {
 }
 
 // Show / hide the controls once the view is open
-$.getView().addEventListener("open", function () {
+$.getView().addEventListener("ti-window-stack:sizechanged", function() {
     if (Alloy.Globals.windowStack.isNotRootLevel()) {
         $.controls.show();
     } else {

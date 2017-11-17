@@ -1,5 +1,5 @@
 <Alloy>
-    <Window module="xp.ui">
+    <Window module="xp.ui" role="menu">
         <ListView onItemclick="onItemClick" defaultItemTemplate="default">
             <Templates>
                 <ItemTemplate name="default">

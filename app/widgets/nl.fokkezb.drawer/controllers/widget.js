@@ -102,26 +102,11 @@ if (mod === 'dk.napp.drawer') {
     // create actual drawer
     $.instance = $.module.createDrawer(_.omit(args, 'window'));
 
-    $.window = Ti.UI.createWindow(_.extend(_.pick(args, ["orientationModes", "exitOnClose", "backgroundColor"]), args.window || {}));
+    $.window = Ti.UI.createWindow(_.extend(_.pick(args, ["orientationModes", "exitOnClose", "backgroundColor", "theme"]), args.window || {}));
     $.window.add($.instance);
 
     $.addTopLevelView($.window);
 }
-
-// $.instance.addEventListener('change', function (e) {
-//  console.log('change');
-//  console.log(e);
-// });
-
-// $.instance.addEventListener('draweropen', function (e) {
-//  console.log('draweropen');
-//  console.log(e.source.rightView.children);
-// });
-
-// $.instance.addEventListener('draweropen', function (e) {
-//  console.log('draweropen');
-//  console.log(JSON.stringify(e.source.drawer));
-// });
 
 if (OS_ANDROID) {
     $.window.addEventListener('open', function (e) {
@@ -308,15 +293,21 @@ if (mod === 'dk.napp.drawer') {
 
 // events
 $.on = function (event, callback, context) {
-    return $.instance.addEventListener(event, callback);
+    if (mod !== 'dk.napp.drawer' && (event === 'open' || event === 'close')) {
+        return $.window.addEventListener(event, callback);
+    }
+    return $.instance.addEventListener(translateEvent(event), callback);
 };
 
 $.off = function (event, callback, context) {
-    return $.instance.removeEventListener(event, callback);
+    if (mod !== 'dk.napp.drawer' && (event === 'open' || event === 'close')) {
+        return $.window.addEventListener(event, callback);
+    }
+    return $.instance.removeEventListener(translateEvent(event), callback);
 };
 
 $.trigger = function (event, args) {
-    return $.instance.fireEvent(event, args);
+    return $.instance.fireEvent(translateEvent(event), args);
 };
 
 $.addEventListener = $.on;
@@ -360,3 +351,29 @@ _.each(methods, function (fn) {
         };
     }
 });
+
+function translateEvent(event) {
+
+    if (mod === 'dk.napp.drawer') {
+
+        if (event === 'draweropen') {
+            event = 'windowDidOpen';
+        }
+
+        if (event === 'drawerclose') {
+            event = 'windowDidClose';
+        }
+
+    } else {
+
+        if (event === 'windowDidOpen') {
+            event = 'draweropen';
+        }
+
+        if (event === 'windowDidClose') {
+            event = 'drawerclose';
+        }
+    }
+
+    return event;
+}

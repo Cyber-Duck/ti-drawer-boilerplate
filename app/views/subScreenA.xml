@@ -1,6 +1,5 @@
 <Alloy>
-    <Window title="Sub A" backgroundColor="#DA81EF">
-        <ActionBar platform="android" displayHomeAsUp="Alloy.Globals.windowStack.isNotRootLevel()" onHomeIconItemSelected="Alloy.Globals.windowStack.back" />
+    <Window module="xp.ui" title="Sub A" backgroundColor="#DA81EF">
         <View height="Ti.UI.SIZE" layout="vertical">
             <Label>Sub Screen A</Label>
             <Label id="stackSize" />
@@ -11,5 +10,3 @@
         <Require id="controls" src="_controls" />
     </Window>
 </Alloy>
-
-

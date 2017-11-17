@@ -64,17 +64,18 @@ exports.createNavigationWindow = function(args) {
 
 exports.createWindow = function(args)
 {
-    var forceWindowAndroid = args.forceWindowAndroid || false;
+    var role = args.role || false;
 
-    var window = Ti.UI[(OS_IOS || forceWindowAndroid) ? 'createWindow' : 'createView'](args);
+    var window = Ti.UI[(OS_ANDROID && _.contains(["main", "menu"], role)) ? "createView" : "createWindow"](args);
 
-    if (OS_IOS && Alloy.Globals.windowStack) {
-        window.addEventListener('ti-window-stack:sizechanged', toggleMenuButton);
-        window.addEventListener('ti-window-stack:sizechanged', toggleSwipe);
+    if (OS_IOS) {
+        window.addEventListener("ti-window-stack:sizechanged", function(e) {
+            toggleSwipe();
+            toggleMenuButton(e);
+        });
     }
 
-    // Show / hide the controls once the view is open
-    if (OS_ANDROID && forceWindowAndroid) {
+    if (OS_ANDROID && window.getApiName() === "Ti.UI.Window") {
         window.addEventListener("open", function() {
             if (Alloy.Globals.windowStack && Alloy.Globals.windowStack.isNotRootLevel()) {
                 // Show the home button and set onClick action

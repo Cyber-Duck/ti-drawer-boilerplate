@@ -1,5 +1,8 @@
 <Alloy>
-    <Window module="xp.ui" title="Root B" backgroundColor="#F9C84D">
+    <Window module="xp.ui" role="main" title="Root B" backgroundColor="#F9C84D">
+        <LeftNavButton platform="ios">
+            <Require src="_menuButton" />
+        </LeftNavButton>
         <View height="Ti.UI.SIZE" layout="vertical">
             <Label>Root Screen B</Label>
             <Label id="stackSize" />

@@ -1,5 +1,5 @@
 <Alloy>
-    <Window module="xp.ui" title="Root A" backgroundColor="#ECECEC">
+    <Window module="xp.ui" role="main" title="Root A" backgroundColor="#ECECEC">
         <LeftNavButton platform="ios">
             <Require src="_menuButton" />
         </LeftNavButton>
