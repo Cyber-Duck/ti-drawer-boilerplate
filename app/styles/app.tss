@@ -1,9 +1,14 @@
-'Label[platform=android,windows]' : {
-	color: '#000'
+"Window" : {
+    backgroundColor: "#fff",
 }
-'Window' : {
-	backgroundColor: '#fff'
+"Window[platform=ios]": {
+    barColor: "#51BEED",
+    titleAttributes: {
+        color: "white",
+    },
+    statusBarStyle: Ti.UI.iOS.StatusBar.LIGHT_CONTENT,
+    navTintColor: "white",
 }
-'TextField[platform=android]' : {
-	height: Ti.UI.SIZE
+"Label" : {
+    color: "#000",
 }

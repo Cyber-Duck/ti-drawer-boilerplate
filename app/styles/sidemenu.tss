@@ -1,10 +1,27 @@
-'ListView' : {
-	separatorColor: 'gray'
+"Window": {
+    backgroundColor: "#3C3C3B",
 }
-'ListItem' : {
+"ListView": {
+    height: Ti.UI.SIZE,
+    showVerticalScrollIndicator: false,
+    backgroundColor: "transparent",
+    canScroll: false,
+}
+"ListView[platform=ios]": {
+    separatorColor: "#c0c0c0",
+    willScrollOnStatusTap: false,
+}
+"ListItem" : {
 	height: 60,
-	color: 'black',
-	font: {
-		fontSize: 20
-	}
+    backgroundColor: "transparent",
+}
+"Label": {
+    height: 60,
+    width: Ti.UI.FILL,
+    left: 20,
+    color: "white",
+    font: {
+        fontSize: 20,
+    },
+    selectedColor: "#3C3C3B",
 }

@@ -1,14 +1,18 @@
 <Alloy>
-    <Window module="xp.ui">
-        <ListView onItemclick="onItemClick">
+    <Window module="xp.ui" role="menu">
+        <ListView onItemclick="onItemClick" defaultItemTemplate="default">
+            <Templates>
+                <ItemTemplate name="default">
+                    <Label bindId="title" />
+                </ItemTemplate>
+            </Templates>
             <ListSection>
                 <HeaderView platform="ios">
                     <View height="70"/>
                 </HeaderView>
-                <ListItem title="Home Screen"/>
-                <ListItem title="Screen A as Home"/>
-                <ListItem title="Screen B as Home"/>
-                <ListItem title="Sub Screen A"/>
+                <ListItem title:text="Root A"/>
+                <ListItem title:text="Root B"/>
+                <ListItem title:text="Sub Screen A\n(in current Root)"/>
             </ListSection>
             <FooterView>
                 <View/>

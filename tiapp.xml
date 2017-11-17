@@ -1,66 +1,73 @@
-<?xml version="1.0" encoding="UTF-8"?><ti:app xmlns:ti="http://ti.appcelerator.org">
-    <id>com.cyberduck.ti-drawer-boilerplate</id>
-    <name>ti-drawer-boilerplate</name>
-    <version>1.0</version>
-    <publisher>not specified</publisher>
-    <url>not specified</url>
-    <description/>
-    <copyright>not specified</copyright>
-    <icon>appicon.png</icon>
-    <fullscreen>false</fullscreen>
-    <navbar-hidden>false</navbar-hidden>
-    <analytics>false</analytics>
-    <guid>6a491c4d-674c-4906-9888-0c711d4b1bad</guid>
-    <property name="ti.ui.defaultunit" type="string">dp</property>
-    <ios>
-        <plist>
-            <dict>
-                <key>UISupportedInterfaceOrientations~iphone</key>
-                <array>
-                    <string>UIInterfaceOrientationPortrait</string>
-                </array>
-                <key>UISupportedInterfaceOrientations~ipad</key>
-                <array>
-                    <string>UIInterfaceOrientationPortrait</string>
-                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
-                    <string>UIInterfaceOrientationLandscapeLeft</string>
-                    <string>UIInterfaceOrientationLandscapeRight</string>
-                </array>
-                <key>UIRequiresPersistentWiFi</key>
-                <false/>
-                <key>UIPrerenderedIcon</key>
-                <false/>
-                <key>UIStatusBarHidden</key>
-                <false/>
-                <key>UIStatusBarStyle</key>
-                <string>UIStatusBarStyleDefault</string>
-            </dict>
-        </plist>
-    </ios>
-    <android xmlns:android="http://schemas.android.com/apk/res/android">
-    </android>
-    <mobileweb>
-        <precache>
-        </precache>
-        <splash>
-            <enabled>true</enabled>
-            <inline-css-images>true</inline-css-images>
-        </splash>
-        <theme>default</theme>
-    </mobileweb>
-    <modules>
-    <module platform="android" version="1.3.6">com.tripvi.drawerlayout</module>
-    <module platform="android" version="1.1.6">dk.napp.drawer</module>
-    <module platform="iphone" version="1.2.3">dk.napp.drawer</module>
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app
+  xmlns:ti="http://ti.appcelerator.org">
+  <id>uk.co.cyberduck.boilerplate.drawer</id>
+  <name>Drawer Boilerplate</name>
+  <version>1.0</version>
+  <publisher>not specified</publisher>
+  <url>not specified</url>
+  <description>not specified</description>
+  <copyright>not specified</copyright>
+  <icon>appicon.png</icon>
+  <fullscreen>false</fullscreen>
+  <navbar-hidden>false</navbar-hidden>
+  <analytics>false</analytics>
+  <guid>1317d019-c81c-45c9-9eee-58086825b726</guid>
+  <property name="ti.ui.defaultunit" type="string">dp</property>
+  <property name="run-on-main-thread" type="bool">true</property>
+  <ios>
+    <plist>
+      <dict>
+        <key>UISupportedInterfaceOrientations~iphone</key>
+        <array>
+          <string>UIInterfaceOrientationPortrait</string>
+        </array>
+        <key>UISupportedInterfaceOrientations~ipad</key>
+        <array>
+          <string>UIInterfaceOrientationPortrait</string>
+          <string>UIInterfaceOrientationPortraitUpsideDown</string>
+          <string>UIInterfaceOrientationLandscapeLeft</string>
+          <string>UIInterfaceOrientationLandscapeRight</string>
+        </array>
+        <key>UIRequiresPersistentWiFi</key>
+        <false/>
+        <key>UIPrerenderedIcon</key>
+        <false/>
+        <key>UIStatusBarHidden</key>
+        <false/>
+        <key>UIStatusBarStyle</key>
+        <string>UIStatusBarStyleDefault</string>
+      </dict>
+    </plist>
+  </ios>
+   <android xmlns:android="http://schemas.android.com/apk/res/android">
+    <manifest android:versionCode="1" android:versionName="1.0">
+      <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25"/>
+      <application android:theme="@style/boilerplate"/>
+    </manifest>
+  </android>
+  <mobileweb>
+    <precache/>
+    <splash>
+      <enabled>true</enabled>
+      <inline-css-images>true</inline-css-images>
+    </splash>
+    <theme>default</theme>
+  </mobileweb>
+  <modules>
+    <module platform="android" version="2.0.0">com.tripvi.drawerlayout</module>
+    <module platform="iphone" version="1.2.4">dk.napp.drawer</module>
   </modules>
-    <deployment-targets>
-        <target device="android">true</target>
-        <target device="ipad">false</target>
-        <target device="iphone">true</target>
-        <target device="mobileweb">false</target>
-        <target device="windows">false</target>
-    </deployment-targets>
-    <sdk-version>6.0.3.GA</sdk-version>
-<plugins><plugin version="1.0">ti.alloy</plugin>
-</plugins>
+  <deployment-targets>
+    <target device="android">true</target>
+    <target device="ipad">false</target>
+    <target device="iphone">true</target>
+    <target device="mobileweb">false</target>
+    <target device="windows">false</target>
+  </deployment-targets>
+  <sdk-version>6.3.0.GA</sdk-version>
+  <plugins>
+    <plugin version="1.0">ti.alloy</plugin>
+  </plugins>
+  <property name="appc-app-id" type="string">5a0ac2426e9f6a09a3595497</property>
 </ti:app>

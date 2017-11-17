@@ -1,0 +1,17 @@
+<Alloy>
+    <NavigationWindow module="xp.ui" modal="true">
+        <Window title="Modal A" backgroundColor="#F26522">
+            <RightNavButton platform="ios">
+                <View>
+                    <Button title="Close" onClick="close" font="{fontSize:18}" />
+                </View>
+            </RightNavButton>
+            <ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="close" />
+            <View height="Ti.UI.SIZE" layout="vertical">
+                <Label color="white">Modal Screen A</Label>
+            </View>
+        </Window>
+    </NavigationWindow>
+</Alloy>
+
+

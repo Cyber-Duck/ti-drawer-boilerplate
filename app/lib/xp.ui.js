@@ -1,18 +1,97 @@
+exports.createNavigationWindow = function(args) {
+    if (OS_ANDROID) {
+        var NavigationWindow = function(args) {
+            this.args = args;
+        };
+
+        NavigationWindow.prototype.open = function(params) {
+            params = params || {};
+            params.displayHomeAsUp = this.args.modal || false;
+
+            return this.openWindow(this.args.window, params);
+        };
+
+        NavigationWindow.prototype.close = function(params) {
+            return this.closeWindow(this.args.window, params);
+        };
+
+        NavigationWindow.prototype.openWindow = function(window, options) {
+            var that = this;
+
+            options = options || {};
+            options.swipeBack = (typeof options.swipeBack === 'boolean') ? options.swipeBack : that.args.swipeBack;
+            options.displayHomeAsUp = (typeof options.displayHomeAsUp === 'boolean') ? options.displayHomeAsUp : that.args.displayHomeAsUp;
+
+            if (options.swipeBack !== false) {
+                window.addEventListener('swipe', function(e) {
+                    if (e.direction === 'right') {
+                        that.closeWindow(window, options);
+                    }
+                });
+            }
+
+            if (OS_ANDROID && options.displayHomeAsUp !== false && !window.navBarHidden) {
+                window.addEventListener('open', function (){
+                    var activity = window.getActivity();
+                    if (activity) {
+                        var actionBar = activity.actionBar;
+                        if (actionBar) {
+                            actionBar.displayHomeAsUp = true;
+                            actionBar.onHomeIconItemSelected = function (){
+                                that.closeWindow(window, options);
+                            };
+                        }
+                    }
+                });
+            }
+
+            return window.open(options);
+        };
+
+        NavigationWindow.prototype.closeWindow = function(window, options) {
+            return window.close(options || {});
+        };
+    }
+
+    var navigationWindow = OS_IOS ? Ti.UI.iOS.createNavigationWindow(args) : new NavigationWindow(args);
+
+    if (args && args.id) {
+        Alloy.Globals[args.id] = navigationWindow;
+    }
+
+    return navigationWindow;
+};
+
 exports.createWindow = function(args)
 {
-    var forceWindowAndroid = args.forceWindowAndroid || false;
+    var role = args.role || false;
 
-    var window = Ti.UI[(OS_IOS || forceWindowAndroid) ? 'createWindow' : 'createView'](args);
+    var window = Ti.UI[(OS_ANDROID && _.contains(["main", "menu"], role)) ? "createView" : "createWindow"](args);
 
-    if (OS_IOS && Alloy.Globals.windowStack) {
-        window.addEventListener('ti-window-stack:sizechanged', toggleMenuButton);
-        window.addEventListener('ti-window-stack:sizechanged', toggleSwipe);
+    if (OS_IOS) {
+        window.addEventListener("ti-window-stack:sizechanged", function(e) {
+            toggleSwipe();
+            toggleMenuButton(e);
+        });
+    }
+
+    if (OS_ANDROID && window.getApiName() === "Ti.UI.Window") {
+        window.addEventListener("open", function() {
+            if (Alloy.Globals.windowStack && Alloy.Globals.windowStack.isNotRootLevel()) {
+                // Show the home button and set onClick action
+                window._internalActivity.actionBar.setDisplayHomeAsUp(true);
+                window._internalActivity.actionBar.setOnHomeIconItemSelected(function() {
+                    // Close the current window
+                    Alloy.Globals.windowStack.back();
+                });
+            }
+        });
     }
 
     return window;
 };
 
-var toggleMenuButton = function (e) {
+var toggleMenuButton = function(e) {
     if (!Alloy.Globals.drawer || !Alloy.Globals.windowStack) {
         return;
     }
@@ -21,7 +100,7 @@ var toggleMenuButton = function (e) {
     }
 };
 
-var toggleSwipe = function () {
+var toggleSwipe = function() {
     if (!Alloy.Globals.drawer || !Alloy.Globals.windowStack) {
         return;
     }

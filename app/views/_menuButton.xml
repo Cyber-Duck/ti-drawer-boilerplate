@@ -1,5 +1,0 @@
-<Alloy>
-    <View width="Ti.UI.SIZE">
-        <Button title="Menu" onClick="toggleMenu" width="Ti.UI.SIZE" />
-    </View>
-</Alloy>
