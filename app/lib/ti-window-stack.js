@@ -1,24 +1,30 @@
 /**
- * An Alloy widget to manage windows stack in same code for iOS and Android, with drawer support
+ * An Alloy widget to manage windows stack in same code
+ * for iOS and Android, including drawer support.
  */
-function WindowStack()
-{
+function WindowStack() {
     // The navigation object for iOS
     var navigationWindow = null,
         // Windows array for history pepuse
         windows = [],
-        that = this,
-        ANDROID = Ti.Platform.name === 'android',
-        // Since iOS 10 Ti.Platform.name return 'iOS' instead of 'iPhone OS'
-        // https://jira.appcelerator.org/browse/TIDOC-2611
-        IOS = Ti.Platform.name === 'iPhone OS' || Ti.Platform.name === 'iOS';
+        that = this;
+
+    /**
+     * Using backbone events
+     */
+    var Backbone = require("alloy/backbone"),
+        events = _.clone(Backbone.Events);
+
+    this.on = events.on;
+    this.off = events.off;
+    this.trigger = events.trigger;
 
     /**
      * Who am i?
      *
      * @type {String}
      */
-    this.apiName = 'ti-window-stack';
+    this.apiName = "ti-window-stack";
 
     /**
      * Constant to open the window into the center of the drawer
@@ -49,13 +55,21 @@ function WindowStack()
     this.targetInDrawer = this.CENTER_WINDOW;
 
     /**
+     * Get external created NavigationWindow
+     *
+     * @return  {Ti.UI.iOS.NavigationWindow} navigationWindow NavigationWindow set.
+     */
+    this.getNavigationWindow = function() {
+        return navigationWindow;
+    };
+
+    /**
      * Set external created NavigationWindow
      *
      * @param  {Ti.UI.iOS.NavigationWindow} _navigationWindow NavigationWindow to set.
      * @return {void}
      */
-    this.setNavigationWindow = function(_navigationWindow)
-    {
+    this.setNavigationWindow = function(_navigationWindow) {
         navigationWindow = _navigationWindow;
     };
 
@@ -65,8 +79,7 @@ function WindowStack()
      * @param  {Number} targetInDrawer Constants: WindowStack.CENTER_WINDOW, WindowStack.RIGHT_WINDOW or WindowStack.LEFT_WINDOW
      * @return {void}
      */
-    this.setTargetInDrawer = function (targetInDrawer)
-    {
+    this.setTargetInDrawer = function (targetInDrawer) {
         if ([that.CENTER_WINDOW, that.RIGHT_WINDOW, that.LEFT_WINDOW].indexOf(targetInDrawer) !== -1) {
             that.targetInDrawer = targetInDrawer;
         }
@@ -81,62 +94,58 @@ function WindowStack()
      * @param  {openWindowParams} params Animation or display properties to use when opening the window. (Optional)
      * @return {void}
      */
-    this.open = function(_window, drawer, params)
-    {
+    this.open = function(_window, drawer, params) {
         drawer = drawer || false;
         params = params || {};
 
         // On open the window --> trigger useful event
-        _window.addEventListener('open', function(e) {
-            _window.fireEvent('ti-window-stack:sizechanged', e);
+        _window.addEventListener("open", function(e) {
+            that.trigger("sizechanged", { type: "sizechanged", source: e.source });
         });
         // On close the window --> update the windows array + trigger useful event
-        _window.addEventListener('close', function(e) {
+        _window.addEventListener("close", function(e) {
             windows = _.without(windows, _window);
-            _window.fireEvent('ti-window-stack:sizechanged', e);
+            that.trigger("sizechanged", { type: "sizechanged", source: e.source });
         });
 
-        if (IOS) {
+        if (OS_IOS) {
             // Create navigationWindow if we don't have, or if we have side menu
             if (navigationWindow === null || drawer) {
                 navigationWindow = Ti.UI.iOS.createNavigationWindow({
                     window: _window
                 });
                 if (drawer) {
-                    // Open the window in center, right or left?
-                    var openIn = 'setCenterWindow';
+                    // Open the window into the drawer in center, right or left?
                     if (that.targetInDrawer === that.RIGHT_WINDOW) {
-                        openIn = 'setRightWindow';
+                        drawer.setRightWindow(navigationWindow);
                     } else if (that.targetInDrawer === that.LEFT_WINDOW) {
-                        openIn = 'setLeftWindow';
+                        drawer.setLeftWindow(navigationWindow);
+                    } else {
+                        drawer.setCenterWindow(navigationWindow);
                     }
-
-                    // Open the window into the drawer
-                    drawer[openIn](navigationWindow);
                 } else {
                     navigationWindow.open(params);
                 }
-
-                // Reset our local stack refrance
-                windows = [];
+                // Reset our local stack reference
+                windows = [_window];
             } else {
                 // Add this window to my stack reference
                 windows.push(_window);
                 // Or just push new window to the stack
                 navigationWindow.openWindow(_window);
             }
-        } else {
+        } else if (OS_ANDROID) {
             if (drawer) {
                 // Extend some properties to drawer containner
-                _.extend(drawer.window, _.pick(_window, ['title', 'keepScreenOn', 'exitOnClose']));
+                _.extend(drawer.window, _.pick(_window, ["title", "keepScreenOn", "exitOnClose"]));
                 // Since android center item is view not a window, we have to fire it ourselves
-                _window.fireEvent('open');
+                _window.fireEvent("open", { source: _window, type: "open" });
                 // Generate Android menu
                 var activity = drawer.window.getActivity();
                 activity.onCreateOptionsMenu = function(e) {
                     // Clean up all items from any other controller
                     e.menu.clear();
-                    if (_window.hasOwnProperty('onCreateOptionsMenu')) {
+                    if (_window.hasOwnProperty("onCreateOptionsMenu")) {
                         _window.onCreateOptionsMenu(e);
                     }
                 };
@@ -145,19 +154,17 @@ function WindowStack()
                 try {
                     activity.invalidateOptionsMenu();
                 } catch (e) {
-                    Ti.API.warn('Maybe we still do not have activity to update the menu, it works now by the way');
+                    console.warn("Maybe we still do not have activity to update the menu, it works now by the way.");
                 }
 
-                // Open the window in center, right or left?
-                var openIn = 'setCenterWindow';
+                // Open the window into the drawer in center, right or left?
                 if (that.targetInDrawer === that.RIGHT_WINDOW) {
-                    openIn = 'setRightWindow';
+                    drawer.setRightWindow(_window);
                 } else if (that.targetInDrawer === that.LEFT_WINDOW) {
-                    openIn = 'setLeftWindow';
+                    drawer.setLeftWindow(_window);
+                } else {
+                    drawer.setCenterWindow(_window);
                 }
-
-                // Open the window into the drawer
-                drawer[openIn](_window);
 
                 // Reset our local stack refrance
                 windows = [];
@@ -165,7 +172,7 @@ function WindowStack()
                 // Add this window to my stack reference
                 windows.push(_window);
                 // Open the window
-               _window.open(params);
+                _window.open(params);
             }
         }
     };
@@ -175,8 +182,7 @@ function WindowStack()
      *
      * @return {Number}
      */
-    this.getSize = function()
-    {
+    this.getSize = function() {
         return windows.length;
     };
 
@@ -185,9 +191,8 @@ function WindowStack()
      *
      * @return {Boolean}
      */
-    this.isRootLevel = function()
-    {
-        return windows.length === 0;
+    this.isRootLevel = function() {
+        return windows.length === 1;
     };
 
     /**
@@ -195,9 +200,17 @@ function WindowStack()
      *
      * @return {Boolean}
      */
-    this.isNotRootLevel = function()
-    {
-        return windows.length > 0;
+    this.isNotRootLevel = function() {
+        return windows.length > 1;
+    };
+
+    /**
+     * Returns last Window from the windows array
+     *
+     * @return {Ti.UI.Window}
+     */
+    this.getCurrentWindow = function() {
+        return _.last(windows);
     };
 
     /**
@@ -206,11 +219,10 @@ function WindowStack()
      * @param  {Ti.UI.Window/Ti.UI.View} _window Window or View to close
      * @return {void}
      */
-    this.close = function(_window)
-    {
-        if (IOS) {
+    this.close = function(_window) {
+        if (OS_IOS && _window && navigationWindow) {
             navigationWindow.closeWindow(_window);
-        } else {
+        } else if (OS_ANDROID && _window) {
             _window.close();
         }
     };
@@ -220,41 +232,43 @@ function WindowStack()
      *
      * @return {void}
      */
-    this.back = function()
-    {
+    this.back = function() {
         // Get last window in the stack
         var _window = _.last(windows);
         // In case assign this function directly to UI item, this will pass to the UI item it self, better use that
-        if (_window) that.close(_window);
+        if (_window) {
+            that.close(_window);
+        }
     };
 
     /**
      * By default, closes all the windows, one after the other, starting for the current window.
      * User sees all the windows getting closed.
      *
-     * @param  {Array} _params _params.animated: Controls wether to animate when
+     * @param  {Object} _params _params.animated: Controls wether to animate when
      *                         all windows are getting closed or not.
      * @return {void}
      */
-    this.home = function(_params)
-    {
-        _params = _params || { animated: true };
+    this.home = function(_params) {
+        _params = _params || {};
+        _.defaults(_params, { animated: true, callback: function() {} });
 
-        var lastLength = windows.length,
-            interval;
+        var lastLength = windows.length;
 
         if (_params.animated) {
             // Animate the window closing so the user sees all of them getting
             // closed one after the other
-            Alloy.Globals.homeInterval = interval = setInterval(function() {
+            Alloy.Globals.homeInterval = setInterval(function() {
                 if (lastLength === windows.length) {
                     Alloy.Globals.windowStack.back();
                     lastLength--;
 
-                    if (lastLength === 0 ||
+                    if (lastLength === 1 || windows[lastLength - 1].apiName === "Ti.UI.View") {
                         // Center window is actually view on Android
-                        windows[lastLength - 1].apiName === 'Ti.UI.View') {
                         clearInterval(Alloy.Globals.homeInterval);
+                        if (_params.callback && _.isFunction(_params.callback)) {
+                            _params.callback();
+                        }
                     }
                 }
             }, 100);
@@ -265,8 +279,12 @@ function WindowStack()
             var lastWindow = _.last(windows),
                 rest = _.without(windows, lastWindow);
 
-            rest.forEach(function(window, index){
-                if (index === 0 && window.apiName === 'Ti.UI.View') {
+            if (_params.callback && _.isFunction(_params.callback)) {
+                lastWindow.addEventListener("close", _params.callback);
+            }
+
+            rest.forEach(function(window, index) {
+                if (index === 0 && window.apiName === "Ti.UI.View") {
                     return;
                 }
                 that.close(window);
@@ -282,27 +300,29 @@ function WindowStack()
      * @param  {Callable} closeCallBack Will call it after close last screen. (Optional)
      * @return {void}
      */
-    this.destroy = function(drawer, closeCallBack)
-    {
+    this.destroy = function(drawer, closeCallBack) {
         if (drawer) {
             if (closeCallBack) {
-                if (IOS) {
-                    drawer.addEventListener('close', closeCallBack);
-                } else {
-                    drawer.window.addEventListener('close', closeCallBack);
+                if (OS_IOS) {
+                    drawer.addEventListener("close", closeCallBack);
+                } else if (OS_ANDROID) {
+                    drawer.window.addEventListener("close", closeCallBack);
                 }
             }
             drawer.close();
-        } else if (IOS) {
-            closeCallBack && navigationWindow.addEventListener('close', closeCallBack);
+        } else if (OS_IOS) {
+            closeCallBack && navigationWindow.addEventListener("close", closeCallBack);
             navigationWindow.close();
-        } else {
-            closeCallBack && _.last(windows).addEventListener('close', closeCallBack);
+        } else if (OS_ANDROID) {
+            closeCallBack && _.last(windows).addEventListener("close", closeCallBack);
             _.each(windows, function(_window) {
-                _window.close();
+                if (_window) {
+                    _window.close();
+                }
             });
         }
     };
+
 }
 
 /**
@@ -310,7 +330,6 @@ function WindowStack()
  *
  * @return {WindowStack} New instance of WindowStack.
  */
-exports.createWindowStack = function()
-{
+exports.createWindowStack = function() {
     return new WindowStack();
 };

@@ -69,10 +69,10 @@ exports.createWindow = function(args)
     var window = Ti.UI[(OS_ANDROID && _.contains(["main", "menu"], role)) ? "createView" : "createWindow"](args);
 
     if (OS_IOS) {
-        window.addEventListener("ti-window-stack:sizechanged", function(e) {
+        Alloy.Globals.windowStack.on("sizechanged", _.debounce(function(e) {
             toggleSwipe();
             toggleMenuButton(e);
-        });
+        }, 300, false));
     }
 
     if (OS_ANDROID && window.getApiName() === "Ti.UI.Window") {
